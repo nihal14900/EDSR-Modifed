@@ -34,10 +34,10 @@ exp_name = "model15-df2k"
 
 if mode == "train":
     # Dataset
-    train_image_dir = r"E:\DF2K"
-    valid_image_dir = r"E:\DIV2K\Valid"
-    test_lr_image_dir = r"E:\Classical\Set5\LRbicx4"
-    test_hr_image_dir = r"E:\Classical\Set5\GTmod12"
+    train_image_dir = r"/kaggle/input/df2kdata/DF2K_train_HR"
+    valid_image_dir = r"/kaggle/input/df2kdata/DF2K_valid_HR"
+    test_lr_image_dir = r"/kaggle/input/super-resolution-benchmarks/Set5/Set5/LRbicx4"
+    test_hr_image_dir = r"/kaggle/input/super-resolution-benchmarks/Set5/Set5/GTmod12"
 
     image_size = int(upscale_factor * 64)
     batch_size = 16
@@ -45,7 +45,7 @@ if mode == "train":
 
     # Incremental training and migration training
     start_epoch = 0
-    resume = r""
+    resume = r"/kaggle/input/model15-df2k-trained206/pytorch/default/1/epoch_206.pth.tar"
 
     # Total num epochs
     epochs = 1000
