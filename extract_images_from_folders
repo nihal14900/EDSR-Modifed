@@ -1,0 +1,37 @@
+import os
+import shutil
+
+def move_images(src_folder, dest_folder):
+    # Ensure destination folder exists
+    os.makedirs(dest_folder, exist_ok=True)
+
+    # Dictionary to keep track of duplicate filenames
+    file_count = {}
+
+    # Traverse through subdirectories
+    for subdir, _, files in os.walk(src_folder):
+        for file in files:
+            file_ext = os.path.splitext(file)[1].lower()  # Get file extension
+            if file_ext in ['.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff']:  # Filter only image files
+                src_path = os.path.join(subdir, file)
+                dest_path = os.path.join(dest_folder, file)
+
+                # Handle duplicate filenames
+                if file in file_count:
+                    file_count[file] += 1
+                    filename, ext = os.path.splitext(file)
+                    new_filename = f"{filename}_{file_count[file]}{ext}"
+                    dest_path = os.path.join(dest_folder, new_filename)
+                else:
+                    file_count[file] = 0
+
+                # Move the image
+                shutil.move(src_path, dest_path)
+
+    print("All images have been moved successfully.")
+
+# Example usage
+source_folder = r"C:\Users\nihal\Downloads\Compressed\Manga109\Manga109_released_2023_12_07\images"
+destination_folder = r"E:\Manga109"
+
+move_images(source_folder, destination_folder)
